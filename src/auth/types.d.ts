@@ -7,17 +7,17 @@ export type AccessToken = string;
 // Request payloads
 // -----------------------------------------------------------------------------
 export type LoginRequest = {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 };
 
 // -----------------------------------------------------------------------------
 // Response payloads
 // -----------------------------------------------------------------------------
 export type LoginResponse = {
-    accessToken: AccessToken;
+  accessToken: AccessToken;
 };
 
 export type RefreshResponse = {
-    accessToken: AccessToken;
+  accessToken: AccessToken;
 };
