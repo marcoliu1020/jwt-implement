@@ -1,0 +1,16 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🚀 Running linting..."
+if ! npm run lint; then
+  echo "❌ Linting failed. Please fix the errors before pushing."
+  exit 1
+fi
+
+echo "🚀 Checking code formatting..."
+if ! npm run format:check; then
+  echo "❌ Code formatting check failed. Please run 'npm run format' to fix."
+  exit 1
+fi
+
+echo "✅ All checks passed. Proceeding with push."
