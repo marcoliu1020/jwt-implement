@@ -33,20 +33,28 @@ export async function fetchWithAuth(
 
   if (res.status !== 401) return res;
 
+  // 👇 下面是處理 token 過期的流程
+  // 👇 下面是處理 token 過期的流程
+  // 👇 下面是處理 token 過期的流程
+
+  // 如果還沒有正在進行的刷新請求，才發起新的刷新請求
   if (!refreshPromise) {
     refreshPromise = refreshAccessToken().finally(() => {
       refreshPromise = null;
     });
   }
 
+  // 所有同時發生的請求都會等這個 Promise
   const newToken = await refreshPromise;
 
+  // 如果刷新失敗，清除 token 並導向登入頁面
   if (!newToken) {
     clearAccessToken();
     window.location.href = LOGIN_PATH;
     throw new Error("Unauthorized");
   }
 
+  // 使用新的 token 重新發送請求
   return fetch(url, withAuthHeader(init));
 }
 
