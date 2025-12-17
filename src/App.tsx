@@ -48,13 +48,11 @@ export default function App() {
 
   if (jwtUser.status === "success") {
     return (
-      <UserCard
-        username={jwtUser.data.username}
-        email={jwtUser.data.email} />
+      <UserCard username={jwtUser.data.username} email={jwtUser.data.email} />
     );
   }
 
-  return <div style={{ color: "red" }}>nothing to display</div>
+  return <div style={{ color: "red" }}>nothing to display</div>;
 }
 
 // ----------------------------------------
@@ -68,7 +66,8 @@ type User = {
 };
 
 function decodeJwtToken(token: string): Result<User> {
-  if (!token) return { status: "failure", error: new Error("No token provided") };
+  if (!token)
+    return { status: "failure", error: new Error("No token provided") };
 
   const parts = token.split(".");
   if (parts.length < 2) {
@@ -89,7 +88,8 @@ function decodeJwtToken(token: string): Result<User> {
       },
     };
   } catch (error) {
-    const err = error instanceof Error ? error : new Error("Failed to decode token");
+    const err =
+      error instanceof Error ? error : new Error("Failed to decode token");
     return { status: "failure", error: err };
   }
 }
