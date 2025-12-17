@@ -1,15 +1,15 @@
 import type { AccessToken } from "./types";
 
-let accessToken: AccessToken | null = null;
+let accessToken: AccessToken = '';
 
-export function setAccessToken(token: AccessToken | null): void {
+export function setAccessToken(token: AccessToken): void {
   accessToken = token;
 }
 
-export function getAccessToken(): AccessToken | null {
+export function getAccessToken(): AccessToken {
   return accessToken;
 }
 
 export function clearAccessToken(): void {
-  accessToken = null;
+  accessToken = '';
 }
