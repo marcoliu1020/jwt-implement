@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { login } from "../auth";
 
-export default function Login() {
+type Props = {
+  onSuccess?: (token: string) => void;
+};
+
+export default function Login({ onSuccess }: Props) {
   const [email, setEmail] = useState("test@test.com");
   const [password, setPassword] = useState("123456");
   const [loading, setLoading] = useState(false);
@@ -15,7 +19,8 @@ export default function Login() {
     setError(null);
     setLoading(true);
     try {
-      await login({ email, password });
+      const token = await login({ email, password });
+      onSuccess?.(token);
     } catch (err) {
       setError(err instanceof Error ? err.message : "login failed");
     } finally {
